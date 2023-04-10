@@ -1,0 +1,12 @@
+{
+  "name": "space-finder-backend-manual",
+  "version": "1.0.0",
+  "description": "backend (build without cdk init) for the course AWS Typescript CDK Serverless with Alex Horea",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
