@@ -1,0 +1,11 @@
+{
+    "editor.tabSize": 3,
+    "prettier.useTabs": true,
+    "prettier.tabWidth": 3,
+    "editor.detectIndentation": false,
+    "editor.indentSize": "tabSize",
+   "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+   },
+   "eslint.format.enable": true
+}
