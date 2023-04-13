@@ -2,3 +2,6 @@
 
 GET {{endpoint}}/hello/
 ###
+
+GET {{endpoint}}/helloNodeJs
+###

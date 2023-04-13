@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@types/uuid": "^9.0.1",
+    "aws-sdk": "^2.1357.0",
     "uuid": "^9.0.0"
   }
 }
