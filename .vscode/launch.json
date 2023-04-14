@@ -30,7 +30,8 @@
          ], 
          "env": {
             "AWS_REGION": "us-east-2",
-            "TABLE_NAME": "SpacesTable"
+            "TABLE_NAME": "SpacesTable",
+            "PRIMARY_KEY": "spaceId"
          }
       }
    ]
