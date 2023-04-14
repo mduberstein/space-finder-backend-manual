@@ -10,9 +10,9 @@ async function handler (event: APIGatewayProxyEvent, context: Context): Promise<
       body: 'Hello from DynamoDb'
    };
 
-   const item = {
-      spaceId : v4()
-   }
+   const item = typeof event.body == 'object' ? event.body : JSON.parse(event.body);
+   item.spaceId = v4();
+
    try {
       await dbClient.put({
          TableName: 'SpacesTable',
@@ -22,6 +22,7 @@ async function handler (event: APIGatewayProxyEvent, context: Context): Promise<
       const typedError = error as AWSError;
       result.body = typedError.message;
    }
+   result.body = JSON.stringify(`Created item with id: ${item.spaceId}`);
    return result;
 
 }
