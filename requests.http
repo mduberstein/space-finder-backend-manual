@@ -5,3 +5,12 @@ GET {{endpoint}}/hello/
 
 GET {{endpoint}}/helloNodeJs
 ###
+
+POST {{endpoint}}/spaces/
+Content-Type: application/json
+
+{
+   "location": "London",
+   "name": "Best Location"
+}
+###
