@@ -21,10 +21,15 @@ async function handler (event: APIGatewayProxyEvent, context: Context): Promise<
          Item: item
       }).promise(); 
       result.body = JSON.stringify(`Created item with id: ${item.spaceId}`);
-   } catch(error: unknown) {
-      result.statusCode = 403;
-      const typedError = error as AWSError;
-      result.body = typedError.message;
+   } catch(error) {
+      if(error instanceof MissingFieldError){
+         result.statusCode = 403
+         result.body = error.message
+      } else {
+         result.statusCode = 500;
+         const typedError = error as AWSError;
+         result.body = typedError.message;
+      }
    }
  
    return result;
