@@ -23,6 +23,7 @@ async function handler (event: APIGatewayProxyEvent, context: Context): Promise<
       const updateResult = await dbClient.update({
          TableName: TABLE_NAME,
          Key: {
+            // computed property name
             [PRIMARY_KEY]: spaceId
          }, 
          UpdateExpression: 'set #zzzNew = :new',

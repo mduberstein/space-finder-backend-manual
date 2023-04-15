@@ -1,9 +1,13 @@
+// Clip 39
 // import { handler } from '../../services/SpacesTable/Create';
 import { APIGateway } from 'aws-sdk';
+// Clip 43, 44, 45
 // import { handler as readHandler } from '../../services/SpacesTable/Read'
 import { APIGatewayProxyEvent } from 'aws-lambda';
-import { handler as updateHandler } from '../../services/SpacesTable/Update'
-
+// Clip 46
+// import { handler as updateHandler } from '../../services/SpacesTable/Update'
+// Clip 47
+import { handler as deleteHandler } from '../../services/SpacesTable/Delete'
 // // Create
 // const event = {
 //    body: {
@@ -32,23 +36,40 @@ import { handler as updateHandler } from '../../services/SpacesTable/Update'
 //       location: 'London'
 //    }
 // } as any;
+// const result = readHandler(event, {} as any);
+// result.then((apiResult)=>{
+//    const items = JSON.parse(apiResult.body);
+//    console.log(items);
+// })
 
-// Read, Clip 46, Update
+// Update, Clip 46
+// const event: APIGatewayProxyEvent = {
+//    queryStringParameters: {
+//       spaceId: '227f4990-b3f0-4d6c-ba2e-580c5cd2260a'
+//    },
+//    body: {
+//       location: 'new location'
+//    }
+// } as any;
+
+// const result = updateHandler(event, {} as any);
+// result.then((apiResult)=>{
+//    const items = JSON.parse(apiResult.body);
+//    console.log(items);
+// })
+
+// Delete, Clip 47
 const event: APIGatewayProxyEvent = {
    queryStringParameters: {
       spaceId: '227f4990-b3f0-4d6c-ba2e-580c5cd2260a'
    },
-   body: {
-      location: 'new location'
-   }
 } as any;
 
-const result = updateHandler(event, {} as any);
+const result = deleteHandler(event, {} as any);
 result.then((apiResult)=>{
    const items = JSON.parse(apiResult.body);
    console.log(items);
 })
-
 
 
 
