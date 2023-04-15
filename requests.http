@@ -9,6 +9,15 @@ GET {{endpoint}}/helloNodeJs
 GET {{endpoint}}/spaces?spaceId=f87d915e-57bf-458f-8fec-33cd2de58391
 ###
 
+PUT {{endpoint}}/spaces?spaceId=f87d915e-57bf-458f-8fec-33cd2de58391
+Content-Type: application/json
+
+{
+   "location": "Updated Location",
+   "name": "Updated Name"
+}
+###
+
 GET {{endpoint}}/spaces?location=London
 ###
 
