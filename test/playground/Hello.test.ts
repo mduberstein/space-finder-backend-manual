@@ -19,11 +19,19 @@ import { APIGatewayProxyEvent } from 'aws-lambda';
 // })
 
 // Read, Clip 44, scan
+// const event: APIGatewayProxyEvent = {
+//    queryStringParameters: {
+//       spaceId: 'f87d915e-57bf-458f-8fec-33cd2de58391'
+//    }
+// } as any;
+
+// Read, Clip 45, query with secondary global index 
 const event: APIGatewayProxyEvent = {
    queryStringParameters: {
-      spaceId: 'f87d915e-57bf-458f-8fec-33cd2de58391'
+      location: 'London'
    }
 } as any;
+
 const result = readHandler(event, {} as any);
 result.then((apiResult)=>{
    const items = JSON.parse(apiResult.body);

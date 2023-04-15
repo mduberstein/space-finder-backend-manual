@@ -12,7 +12,7 @@ export interface TableProps {
    readLambdaPath?: string,
    updateLambdaPath?: string,
    deleteLambdaPath?: string,
-
+   secondaryIndexes?: string[]
 }
 export class GenericTable {
    private table: Table;
@@ -33,6 +33,7 @@ export class GenericTable {
 
 	private initialize() {
       this.createTable();
+      this.addSecondaryIndexes();
       this.createLambdas();
       this.grantTableRights();
 	}
@@ -45,6 +46,23 @@ export class GenericTable {
 			},
          tableName: this.props.tableName
 		});
+   }
+
+   // Global Secondary Index names we will use are the same as their Partition Keys
+   // they are the elelments of the array of strings this.props.secondaryIndexes
+   // initialized in the constructor
+   private addSecondaryIndexes() {
+      if(this.props.secondaryIndexes) {
+         for (const secondaryIndex of this.props.secondaryIndexes) {
+            this.table.addGlobalSecondaryIndex({
+               indexName: secondaryIndex,
+               partitionKey: {
+                  name: secondaryIndex,
+                  type: AttributeType.STRING
+               }
+            })
+         }
+      }
    }
 
    private createSingleLambda(lambdaName: string): NodejsFunction {
