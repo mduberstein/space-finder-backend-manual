@@ -70,10 +70,18 @@ import { APIGatewayProxyEvent } from 'aws-lambda';
 //    console.log(items);
 // })
 
-// Validate and Create, Clip 48
+// // Validate and Create, Clip 48
+// const event: APIGatewayProxyEvent = {
+//    body: {
+//       name: 'some name'
+//    },
+// } as any;
+
+// Add Utils.ts and Create, Clip 49
 const event: APIGatewayProxyEvent = {
    body: {
-      name: 'some name'
+      name: 'some name',
+      location: 'some location'
    },
 } as any;
 
