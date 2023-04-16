@@ -21,7 +21,9 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "@aws-amplify/auth": "^5.2.3",
     "@types/aws-lambda": "^8.10.114",
+    "aws-amplify": "^5.0.25",
     "aws-sdk": "^2.1357.0"
   }
 }
