@@ -2,7 +2,6 @@ import { Auth, Amplify } from 'aws-amplify';
 import { config } from './config'
 import { CognitoUser } from '@aws-amplify/auth';
 
-
 // there was no intellisense or type information here
 Amplify.configure ({
    Auth: {
