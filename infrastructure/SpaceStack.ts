@@ -58,6 +58,7 @@ export class SpaceStack extends Stack {
       // HelloNodeJs Api integration
       const helloLambdaNodeJsIntegration = new LambdaIntegration(helloLambdaNodeJs);
       const helloLambdaNodeJsResource = this.api.root.addResource('helloNodeJs');
+      // SpaceUserAuthorizer is associated with the GET method of /helloLambdaNodeJs in the next line
       helloLambdaNodeJsResource.addMethod('GET', helloLambdaNodeJsIntegration, optionsWithAuthorizer);
 
       //Spaces API Integrations
