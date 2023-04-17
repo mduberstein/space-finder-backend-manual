@@ -1,6 +1,7 @@
 import { CfnOutput } from 'aws-cdk-lib';
 import { CognitoUserPoolsAuthorizer, RestApi } from 'aws-cdk-lib/aws-apigateway';
-import { UserPool, UserPoolClient } from 'aws-cdk-lib/aws-cognito';
+import { CfnUserPoolGroup, UserPool, UserPoolClient } from 'aws-cdk-lib/aws-cognito';
+import { CfnUserGroup } from 'aws-cdk-lib/aws-elasticache';
 import { Construct } from 'constructs';
 
 
@@ -18,6 +19,7 @@ export class AuthorizerWrapper {
       this.createUserPool();
       this.addUserPoolClient();
       this.createAuthorizer();
+      this.createAdminsGroup();
    }
 
    private createUserPool(){
@@ -59,4 +61,11 @@ export class AuthorizerWrapper {
       // in my env, without this line, cdk synth succeeds
       this.authorizer._attachToApi(this.api);
    }
-}
+
+   private createAdminsGroup(){
+      new CfnUserPoolGroup(this.scope, 'admins', {
+         groupName: 'admins',
+         userPoolId: this.userPool.userPoolId
+      });
+   }
+} 
