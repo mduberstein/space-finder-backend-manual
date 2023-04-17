@@ -2,7 +2,7 @@ import {Stack, StackProps } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import { Code, Function as LambdaFunction, Runtime} from 'aws-cdk-lib/aws-lambda'
 import { join } from 'path';
-import { LambdaIntegration, RestApi} from 'aws-cdk-lib/aws-apigateway'
+import { AuthorizationType, LambdaIntegration, MethodOptions, RestApi} from 'aws-cdk-lib/aws-apigateway'
 import { GenericTable } from './GenericTable';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { PolicyStatement } from 'aws-cdk-lib/aws-iam';
@@ -26,7 +26,7 @@ export class SpaceStack extends Stack {
       super(scope, id, props)
 
       this.authorizer = new AuthorizerWrapper(this, this.api);
-      
+
       const helloLambda = new LambdaFunction (this, 'helloLambda', {
          runtime: Runtime.NODEJS_18_X,
          code: Code.fromAsset(join( __dirname, '..', 'services', 'hello')),
@@ -48,10 +48,17 @@ export class SpaceStack extends Stack {
       s3ListPolicy.addResources('*');
       helloLambdaNodeJs.addToRolePolicy(s3ListPolicy);
 
+      const optionsWithAuthorizer: MethodOptions = {
+         authorizationType: AuthorizationType.COGNITO,
+         authorizer: {
+            authorizerId: this.authorizer.authorizer.authorizerId
+         }
+      }
+
       // HelloNodeJs Api integration
       const helloLambdaNodeJsIntegration = new LambdaIntegration(helloLambdaNodeJs);
       const helloLambdaNodeJsResource = this.api.root.addResource('helloNodeJs');
-      helloLambdaNodeJsResource.addMethod('GET', helloLambdaNodeJsIntegration);
+      helloLambdaNodeJsResource.addMethod('GET', helloLambdaNodeJsIntegration, optionsWithAuthorizer);
 
       //Spaces API Integrations
       const spaceResource = this.api.root.addResource('spaces');
