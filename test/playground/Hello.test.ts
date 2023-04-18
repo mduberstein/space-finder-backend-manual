@@ -7,6 +7,10 @@ import { APIGatewayProxyEvent } from 'aws-lambda';
 // import { handler as updateHandler } from '../../services/SpacesTable/Update'
 // //Clip 47
 // import { handler as deleteHandler } from '../../services/SpacesTable/Delete'
+
+// Clip 59, Debug Code
+import {handler as authorizeHandler} from '../../services/node-lambda/hello'
+
 // // Create
 // const event = {
 //    body: {
@@ -77,19 +81,36 @@ import { APIGatewayProxyEvent } from 'aws-lambda';
 //    },
 // } as any;
 
-// Add Utils.ts and Create, Clip 49
-const event: APIGatewayProxyEvent = {
-   body: {
-      name: 'some name',
-      location: 'some location'
-   },
-} as any;
+// // Add Utils.ts and Create, Clip 49
+// const event: APIGatewayProxyEvent = {
+//    body: {
+//       name: 'some name',
+//       location: 'some location'
+//    },
+// } as any;
 
-const result = handler(event, {} as any);
-result.then((apiResult)=>{
-   const items = JSON.parse(apiResult.body);
-   console.log(items);
-})
+// const result = handler(event, {} as any);
+// result.then((apiResult)=>{
+//    const items = JSON.parse(apiResult.body);
+//    console.log(items);
+// })
+
+// DEBUG_CODE_CLIP59_START
+const event1 = {
+   "requestContext": {
+      "resourceId": "pfzr6b",
+       "authorizer": {
+         "claims": {
+           "sub": "9f831755-bf98-4152-b589-edbceac70e4e",
+           "cognito:groups": "admins"
+         }
+      }
+   }
+};
+
+const result = authorizeHandler(event1, {} as any);
+console.log(`result: ${result}`);
+// DEBUG_CODE_CLIP59_END
 
 
 
